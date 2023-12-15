@@ -1,43 +1,48 @@
 package GeneralThreadExample;
 
 public class ThreadPractice extends Thread {
-	static int c=0;
-	public void run() {
-		try {
-			ThreadPractice.printCounting();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
-	public static void printCounting() throws InterruptedException {
-		for(int i =1,j=11;i<=10 || j<=20;i++,j++) {
-			
-			if(Thread.currentThread().getName().equals("T1")) {
-				c++;
-				System.out.println(Thread.currentThread().getName()+" Value "+i+" "+c);
-				Thread.currentThread().sleep(100);
-				
-			}
-			// local variable in run method creates separate copy for each thread in memory
-			if(Thread.currentThread().getName().equals("T2")) {
-				c++;
-				System.out.println(Thread.currentThread().getName()+" Value "+i+" "+c);
-				Thread.currentThread().sleep(101);
-				
-			}
-		}
-	}
-
+	public int PRINT_NUMBERS_UPTO=10;
+    static int  number=1;
+    int remainder;
+    static Object lock=new Object();
+ 
+    ThreadPractice(int remainder)
+    {
+        this.remainder=remainder;
+    }
+ 
+    @Override
+    public void run() {
+        while (number < PRINT_NUMBERS_UPTO-1) {
+            synchronized (lock) {
+                while (number % 3 != remainder) { // wait for numbers other than remainder
+                    try {
+                        lock.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                System.out.println(Thread.currentThread().getName() + " " + number);
+                number++;
+                lock.notifyAll();
+            }
+        }
+    }
+	
 	public static void main(String[] args) {
 		
-		ThreadPractice thread1 = new ThreadPractice();
-		thread1.setName("T1");
-		thread1.start();
-		ThreadPractice thread2 = new ThreadPractice();
-		thread2.setName("T2");
-		thread2.start();
+		ThreadPractice runnable1=new ThreadPractice(1);
+		ThreadPractice runnable2=new ThreadPractice(2);
+		ThreadPractice runnable3=new ThreadPractice(0);
+	 
+	        Thread t1=new Thread(runnable1,"T1");
+	        Thread t2=new Thread(runnable2,"T2");
+	        Thread t3=new Thread(runnable3,"T3");
+	 
+	        t1.start();
+	        t2.start();
+	        t3.start();   
 		
 	}
 

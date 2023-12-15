@@ -1,4 +1,4 @@
-package Deadlock;
+package DeadlockLambda;
 
 public class DeadlockExample{
 

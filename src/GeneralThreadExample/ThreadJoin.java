@@ -33,11 +33,11 @@ public class ThreadJoin extends Thread{
 	public static void main(String[] args) throws InterruptedException {
 		ThreadJoin thread1 = new ThreadJoin();
 		thread1.setName("T1");
-		thread1.setPriority(1);
+		//thread1.setPriority(1);
 		
 		ThreadJoin thread2 = new ThreadJoin();
 		thread2.setName("T2");
-		thread2.setPriority(10);
+		//thread2.setPriority(10);
 		
 		//thread1.setPriority(8);
 		thread1.start();
