@@ -39,7 +39,7 @@ public class DeadlockExample{
 		});
 		
 		thread1.start();
-		//thread1.join(); // to Avoid Deadlock
+		//thread1.join(); // to Avoid Deadlock, Main thread will wait here. once t1 is done then execute T2
 		thread2.start();
 	}
 

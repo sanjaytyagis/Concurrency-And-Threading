@@ -1,6 +1,13 @@
 package SemaphoreLock;
 
+/*
+ * A semaphore is a counter that controls how many threads can access a resource at the same time.
 
+Type				Meaning
+
+Counting Semaphore	Allows up to N threads
+Binary Semaphore	Special case with only 1 permit (works like a simple lock)
+ */
 public class Main {
 
 	public static void main(String[] args) {

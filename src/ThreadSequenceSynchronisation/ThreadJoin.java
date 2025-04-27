@@ -1,4 +1,4 @@
-package GeneralThreadExample;
+package ThreadSequenceSynchronisation;
 
 public class ThreadJoin extends Thread{
 
