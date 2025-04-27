@@ -1,7 +1,11 @@
 package CompletableFutureExample;
 
 import java.util.concurrent.CompletableFuture;
+/*
+  supplyAsync() runs the task asynchronously (like on a different thread from ForkJoinPool.commonPool()).
 
+
+ */
 public class CompletableFutureExample {
 
 	public static void main(String[] args) {
@@ -25,6 +29,14 @@ public class CompletableFutureExample {
 
         // Optional: wait for completion (only if you want to block)
         future.join(); // block main until future completes
+        
+        /*
+         ✅ Chaining multiple async tasks:
+
+		CompletableFuture.supplyAsync(() -> "Hello")
+    												.thenApply(data -> data + " World")
+    												.thenAccept(System.out::println);
+         */
     }
 
 }
